@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../components/bottom_nav_bar.dart';
+import '../const.dart';
+import 'Shop_page.dart';
+import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,10 +12,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  void navigateBottomBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  //pages
+  final List<Widget> _pages = [
+    //shop page
+    ShopPage(),
+
+    //cart page
+    CartPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      bottomNavigationBar: MyBottomNavBar(
+        onTabChange: (index) => navigateBottomBar(index),
+      ),
+      body: _pages[_selectedIndex],
     );
   }
 }
