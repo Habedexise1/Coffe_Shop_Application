@@ -9,7 +9,7 @@ class CoffeeTile extends StatelessWidget {
   CoffeeTile(
       {super.key,
       required this.coffee,
-      required void Function() onPressed,
+      required this.onPressed,
       required this.icon});
   void Function()? onPressed;
 

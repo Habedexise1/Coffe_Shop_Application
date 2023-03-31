@@ -16,6 +16,14 @@ class _CartPageState extends State<CartPage> {
     Provider.of<CoffeShop>(context, listen: false).removeItemFromCart(coffee);
   }
 
+  void payNow() {
+    /*
+    
+    fill out your payment
+
+     */
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CoffeShop>(
@@ -30,25 +38,43 @@ class _CartPageState extends State<CartPage> {
                 style: TextStyle(fontSize: 20),
               ),
 
+              SizedBox(
+                height: 20,
+              ),
+
               //List of cart items
               Expanded(
                 child: ListView.builder(
+                  itemCount: value.userCart.length,
                   itemBuilder: (context, index) {
                     // get individual cart items
                     Coffee eachCoffee = value.userCart[index];
 
-                    // create a new function that calls removeFromCart with the appropriate parameter
-                    void Function() onPressed =
-                        () => removeFromCart(eachCoffee);
-
                     //return coffee tile
                     return CoffeeTile(
                         coffee: eachCoffee,
-                        onPressed: onPressed,
+                        onPressed: () => removeFromCart(eachCoffee),
                         icon: const Icon(Icons.delete));
                   },
                 ),
               ),
+              GestureDetector(
+                onTap: payNow,
+                child: Container(
+                  padding: const EdgeInsets.all(25),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.brown,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Pay Now",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
